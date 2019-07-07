@@ -1,5 +1,5 @@
 const { argv } = require('./config/yargs');
-const color = require('colors');
+const colors = require('colors');
 
 console.info('Todo-list App started ....'.bold.yellow);
 
