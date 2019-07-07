@@ -1,5 +1,7 @@
+
 const { argv } = require('./config/yargs');
 const colors = require('colors');
+const todoListService = require('./services/todolist-services');
 
 console.info('Todo-list App started ....'.bold.yellow);
 
@@ -7,7 +9,8 @@ const comando = argv._[0];
 
 switch (comando) {
     case 'crear': {
-        console.info('comado crear');
+        const tarea = todoListService.crear(argv.descripcion);
+        console.log('tarea: ', tarea);
         break;
     }
     case 'listar': {
