@@ -22,13 +22,23 @@ const actualizarTarea = async (descripcion, completado = true) => {
         throw new Error('No se encontro la tarea a actualizar');
     }
     todolist[index].completado = completado;
-    console.log('todolist[index].completado: ', todolist[index].completado);
     repository.save(todolist)
     return todolist[index];
+};
+
+const borrarTarea = async (descripcion) => {
+    const index = todolist.filter(tarea => tarea.descripcion === descripcion);
+    if (index < 0) {
+        throw new Error('No se encontro la tarea a borrar');
+    }
+    todolist.splice(index,1);
+    repository.save(todolist)
+    return true;
 };
 
 module.exports = {
     crearTarea,
     getTareas,
-    actualizarTarea
+    actualizarTarea,
+    borrarTarea
 }

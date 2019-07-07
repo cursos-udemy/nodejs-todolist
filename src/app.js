@@ -20,7 +20,8 @@ switch (comando) {
         console.info('========================================================================'.gray.bold);
         if (todolist.length > 0) {
             todolist.forEach(tarea => {
-                console.info(`${tarea.completado ? 'Completado'.green.bold : 'Pendiente'.red.bold}\t| ${tarea.descripcion}`);
+                const completado = (''+tarea.completado) === "true";
+                console.info(`${completado  ? 'Completado'.green.bold : 'Pendiente'.red.bold}\t| ${tarea.descripcion}`);
             });
         } else {
             console.info('OYEEEEE AUN NO HAZ INGRESADO TAREAS!'.bold.magenta);
@@ -31,6 +32,12 @@ switch (comando) {
     case 'actualizar': {
         todoListService.actualizarTarea(argv.descripcion, argv.completado)
             .then(tarea => console.log('Se actualizo la tarea: ', tarea))
+            .catch(err => console.error(err.message));
+        break;
+    }
+    case 'borrar': {
+        todoListService.borrarTarea(argv.descripcion)
+            .then(() => console.log('Se elimino la tarea correctamente'))
             .catch(err => console.error(err.message));
         break;
     }
