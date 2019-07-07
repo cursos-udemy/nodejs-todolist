@@ -1,7 +1,7 @@
 
 const { argv } = require('./config/yargs');
 const colors = require('colors');
-const todoListService = require('./services/todolist-services');
+const todoListService = require('./services/todolist-service');
 
 console.info('Todo-list App started ....'.bold.yellow);
 
@@ -23,13 +23,15 @@ switch (comando) {
                 console.info(`${tarea.completado ? 'Completado'.green.bold : 'Pendiente'.red.bold}\t| ${tarea.descripcion}`);
             });
         } else {
-            console.info('OYEEEEE AUN NO HAZ CARGADO TAREAS!'.bold.magenta);
+            console.info('OYEEEEE AUN NO HAZ INGRESADO TAREAS!'.bold.magenta);
         }
         console.info('========================================================================'.gray.bold);
         break;
     }
     case 'actualizar': {
-        console.info('comado actualizar');
+        todoListService.actualizarTarea(argv.descripcion, argv.completado)
+            .then(tarea => console.log('Se actualizo la tarea: ', tarea))
+            .catch(err => console.error(err.message));
         break;
     }
     default: {
