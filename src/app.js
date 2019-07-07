@@ -9,12 +9,23 @@ const comando = argv._[0];
 
 switch (comando) {
     case 'crear': {
-        const tarea = todoListService.crear(argv.descripcion);
+        const tarea = todoListService.crearTarea(argv.descripcion);
         console.log('tarea: ', tarea);
         break;
     }
     case 'listar': {
-        console.info('comado listar');
+        const todolist = todoListService.getTareas();
+        console.info('========================================================================'.gray.bold);
+        console.info('ESTADO'.bold.inverse + '\t\t| '.bold + 'TAREA'.bold.inverse);
+        console.info('========================================================================'.gray.bold);
+        if (todolist.length > 0) {
+            todolist.forEach(tarea => {
+                console.info(`${tarea.completado ? 'Completado'.green.bold : 'Pendiente'.red.bold}\t| ${tarea.descripcion}`);
+            });
+        } else {
+            console.info('OYEEEEE AUN NO HAZ CARGADO TAREAS!'.bold.magenta);
+        }
+        console.info('========================================================================'.gray.bold);
         break;
     }
     case 'actualizar': {

@@ -2,7 +2,7 @@ const repository = require('../repositories/todolist-repository');
 
 let todolist = repository.load();
 
-const crear = (descripcion) => {
+const crearTarea = (descripcion) => {
     const tarea = {
         descripcion,
         completado: false
@@ -12,6 +12,11 @@ const crear = (descripcion) => {
     return tarea;
 };
 
+const getTareas = () => {
+    return todolist;
+};
+
 module.exports = {
-    crear
+    crearTarea,
+    getTareas
 }
