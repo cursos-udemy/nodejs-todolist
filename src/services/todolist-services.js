@@ -1,6 +1,6 @@
 const repository = require('../repositories/todolist-repository');
 
-let todolist = [];
+let todolist = repository.load();
 
 const crear = (descripcion) => {
     const tarea = {
